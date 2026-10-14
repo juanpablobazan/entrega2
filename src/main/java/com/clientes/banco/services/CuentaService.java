@@ -1,19 +1,27 @@
+package com.clientes.banco.services;
+import com.clientes.banco.entities.Cuenta;
+import com.clientes.banco.repositories.CuentaRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Service
 public class CuentaService{
+    @Autowired
     private final CuentaRepository cuentaRepository;
 
     public CuentaService(CuentaRepository cuentaRepository) {
         this.cuentaRepository = cuentaRepository;
     }
 
-    public Cuenta buscarCuentaPorId(String id) {
-        return cuentaRepository.findById(id);
+    public Cuenta buscarCuentaPorId(Long id) {
+        return cuentaRepository.findById(id).orElse(null);
     }
 
     public Cuenta guardarCuenta(Cuenta cuenta) {
         return cuentaRepository.save(cuenta);
     }
 
-    public void eliminarCuenta(String id) {
+    public void eliminarCuenta(Long id) {
         cuentaRepository.deleteById(id);
     }
 

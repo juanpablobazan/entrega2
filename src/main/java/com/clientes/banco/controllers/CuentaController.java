@@ -1,4 +1,14 @@
+package com.clientes.banco.controllers;
+
+import org.springframework.web.bind.annotation.*;
+import com.clientes.banco.entities.Cuenta;
+import com.clientes.banco.services.CuentaService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@RestController
+@RequestMapping("/api/cuenta")
 public class CuentaController {
+    @Autowired
     private final CuentaService cuentaService;
 
     public CuentaController(CuentaService cuentaService) {
@@ -6,7 +16,7 @@ public class CuentaController {
     }
 
     @GetMapping("/{id}")
-    public Cuenta buscarCuentaPorId(@PathVariable String id) {
+    public Cuenta buscarCuentaPorId(@PathVariable Long id) {
         return cuentaService.buscarCuentaPorId(id);
     }
 
@@ -16,12 +26,12 @@ public class CuentaController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminarCuenta(@PathVariable String id) {
+    public void eliminarCuenta(@PathVariable Long id) {
         cuentaService.eliminarCuenta(id);
     }
 
     @PutMapping("/{id}")
-    public Cuenta editarCuenta(@PathVariable String id, @RequestBody Cuenta cuenta) {
+    public Cuenta editarCuenta(@PathVariable Long id, @RequestBody Cuenta cuenta) {
         return cuentaService.editarCuenta(cuenta);
     }
 }

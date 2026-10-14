@@ -16,15 +16,15 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Usuario buscarUsuarioPorId(String id) {
-        return usuarioRepository.findById(id);
+    public Usuario buscarUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
     }
 
     public Usuario guardarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
     
-    public void eliminarUsuario(String id) {
+    public void eliminarUsuario(Long id) {
         usuarioRepository.deleteById(id);
     }
 

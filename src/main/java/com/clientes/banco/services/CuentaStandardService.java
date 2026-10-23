@@ -1,5 +1,7 @@
 package com.clientes.banco.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,10 @@ public class CuentaStandardService {
 
     public CuentaStandardService(CuentaStandardRepository cuentaStandardRepository) {
         this.cuentaStandardRepository = cuentaStandardRepository;
+    }
+
+    public List<CuentaStandard> listar() {
+        return cuentaStandardRepository.findAll();
     }
 
     public CuentaStandard save(CuentaStandard cuentaStandard) {

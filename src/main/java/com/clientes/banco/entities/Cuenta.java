@@ -2,7 +2,6 @@ package com.clientes.banco.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,8 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cuentas")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Cuenta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

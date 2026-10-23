@@ -1,11 +1,11 @@
 package com.clientes.banco.entities;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
-@DiscriminatorValue("STANDARD")
+@Table(name = "cuenta_standard")
 public class CuentaStandard extends Cuenta {
     @Column(name = "puntos_acumulados")
     private int puntosAcumulados;

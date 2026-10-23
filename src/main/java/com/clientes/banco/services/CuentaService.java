@@ -1,4 +1,7 @@
 package com.clientes.banco.services;
+
+import java.util.List;
+
 import com.clientes.banco.entities.Cuenta;
 import com.clientes.banco.repositories.CuentaRepository;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,10 @@ public class CuentaService{
 
     public CuentaService(CuentaRepository cuentaRepository) {
         this.cuentaRepository = cuentaRepository;
+    }
+
+    public List<Cuenta> listar() {
+        return cuentaRepository.findAll();
     }
 
     public Cuenta buscarCuentaPorId(Long id) {

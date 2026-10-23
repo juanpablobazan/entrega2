@@ -1,4 +1,7 @@
 package com.clientes.banco.services;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.clientes.banco.entities.CuentaPremium;
 import com.clientes.banco.repositories.CuentaPremiumRepository;
@@ -11,6 +14,10 @@ public class CuentaPremiumService {
 
     public CuentaPremiumService(CuentaPremiumRepository cuentaPremiumRepository) {
         this.cuentaPremiumRepository = cuentaPremiumRepository;
+    }
+
+    public List<CuentaPremium> listar() {
+        return cuentaPremiumRepository.findAll();
     }
 
     public CuentaPremium save(CuentaPremium cuentaPremium) {

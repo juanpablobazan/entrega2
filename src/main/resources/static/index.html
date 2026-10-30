@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f6f2">
+  <meta name="description" content="Panel privado para gestionar creadoras y calcular comisiones.">
+  <title>Nexo — Gestión de creadoras</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#inicio" aria-label="Nexo, inicio">
+        <span class="brand-mark">n</span>
+        <span class="brand-name">nexo<span>.</span><small>CREATOR DESK</small></span>
+      </a>
+
+      <div class="workspace-label">ESPACIO DE TRABAJO</div>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="nav-link active" href="#inicio">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="15" width="7" height="6" rx="1.5"/></svg>
+          Resumen
+        </a>
+        <a class="nav-link" href="#modelos">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.8 20a6.2 6.2 0 0 1 12.4 0M16 5.2a3.5 3.5 0 0 1 0 6.7M17.3 14.2a5.7 5.7 0 0 1 4 5.4"/></svg>
+          Mis modelos
+          <span class="nav-count" id="nav-count">0</span>
+        </a>
+        <a class="nav-link" href="#comisiones">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5h18v12H3zM3 7.5l2-3h14l2 3M16 13.5h2"/></svg>
+          Comisiones
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="privacy-card">
+          <span class="privacy-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3M12 14v3"/></svg>
+          </span>
+          <strong>Tus datos, en privado</strong>
+          <p>No se suben a un servidor. Evitá usar un dispositivo compartido.</p>
+        </div>
+        <div class="profile-chip">
+          <span class="profile-avatar">R</span>
+          <span><strong>Reclutador</strong><small>Panel personal</small></span>
+          <span class="online-dot" aria-label="En línea"></span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="inicio">
+      <header class="topbar">
+        <div class="breadcrumb">Workspace <span>/</span> <strong>Resumen</strong></div>
+        <div class="topbar-right">
+          <span class="today-label" id="today-label"></span>
+          <button class="button button-primary button-small" id="add-model-top" type="button">
+            <span aria-hidden="true">＋</span> Agregar modelo
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <section class="welcome-row">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-dot"></span> TU PANEL DE CONTROL</div>
+            <h1>Hola, reclutador <span class="wave" aria-hidden="true">✳</span></h1>
+            <p class="welcome-copy">Un vistazo claro a tus modelos y tus ingresos.</p>
+          </div>
+          <button class="button button-primary add-model-main" id="add-model-main" type="button">
+            <span aria-hidden="true">＋</span> Agregar modelo
+          </button>
+        </section>
+
+        <section class="stats-grid" aria-label="Indicadores">
+          <article class="stat-card">
+            <div class="stat-top"><span>Modelos activos</span><span class="stat-icon icon-lilac"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.8 20a6.2 6.2 0 0 1 12.4 0M16 5.2a3.5 3.5 0 0 1 0 6.7M17.3 14.2a5.7 5.7 0 0 1 4 5.4"/></svg></span></div>
+            <div class="stat-value" id="stat-models">0</div>
+            <div class="stat-foot"><span class="status-pip"></span> En seguimiento</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>Ingresos del mes</span><span class="stat-icon icon-peach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8v18.4M17.5 7.2c-.7-1.6-2.5-2.5-5.2-2.5-3 0-5 1.4-5 3.6 0 5.4 10.4 2.2 10.4 7 0 2.3-2.1 3.9-5.4 3.9-2.7 0-4.8-1-5.7-2.7"/></svg></span></div>
+            <div class="stat-value" id="stat-revenue">$0</div>
+            <div class="stat-foot">Suma de ingresos registrados</div>
+          </article>
+          <article class="stat-card stat-highlight">
+            <div class="stat-top"><span>Tu comisión estimada</span><span class="stat-icon icon-white"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17 9 12l3.5 3.5L20 7M14 7h6v6"/></svg></span></div>
+            <div class="stat-value" id="stat-commission">$0</div>
+            <div class="stat-foot"><span class="highlight-check">✓</span> Según los porcentajes acordados</div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel models-panel" id="modelos">
+            <div class="panel-heading">
+              <div>
+                <div class="eyebrow">TU EQUIPO</div>
+                <h2>Mis modelos <span class="heading-count" id="heading-count">0</span></h2>
+              </div>
+              <label class="search-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
+                <input id="model-search" type="search" placeholder="Buscar modelo..." aria-label="Buscar modelo">
+              </label>
+            </div>
+            <div id="model-list" class="model-list"></div>
+            <div id="empty-state" class="empty-state">
+              <div class="empty-illustration" aria-hidden="true">
+                <svg viewBox="0 0 64 64"><rect x="10" y="9" width="44" height="46" rx="10"/><circle cx="32" cy="26" r="8"/><path d="M17 49a15 15 0 0 1 30 0M48 13v12M42 19h12"/></svg>
+              </div>
+              <h3>Tu equipo empieza aquí</h3>
+              <p>Agrega tu primera modelo para llevar sus ingresos y calcular tu comisión.</p>
+              <button class="button button-soft" id="add-model-empty" type="button">＋ Agregar primera modelo</button>
+            </div>
+          </article>
+
+          <aside class="panel commission-panel" id="comisiones">
+            <div class="panel-heading commission-heading">
+              <div>
+                <div class="eyebrow">DESGLOSE</div>
+                <h2>Comisiones</h2>
+              </div>
+              <span class="period-pill">Este mes</span>
+            </div>
+            <div class="commission-total-label">Tu estimado total</div>
+            <div class="commission-total" id="commission-total">$0</div>
+            <div class="commission-divider"></div>
+            <div class="commission-list-heading"><span>Modelo</span><span>Tu parte</span></div>
+            <div id="commission-list" class="commission-list"></div>
+            <div id="commission-empty" class="commission-empty">Las comisiones de tu equipo aparecerán aquí.</div>
+            <div class="commission-note"><span>i</span> Cálculo orientativo sobre los ingresos que registres.</div>
+          </aside>
+        </section>
+        <footer class="page-footer"><span>© Nexo Creator Desk</span><span>Gestión responsable · Solo mayores de 18 años</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="model-dialog" id="model-dialog" aria-labelledby="dialog-title">
+    <form id="model-form" novalidate>
+      <div class="dialog-header">
+        <div>
+          <div class="eyebrow">PERFIL DE CREADORA</div>
+          <h2 id="dialog-title">Agregar modelo</h2>
+        </div>
+        <button class="icon-button" id="close-dialog" type="button" aria-label="Cerrar">×</button>
+      </div>
+      <div class="dialog-body">
+        <label class="photo-upload" for="model-photo">
+          <span class="photo-preview" id="photo-preview">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="m4 17 5-4 3 2 3-3 5 5"/></svg>
+          </span>
+          <span class="photo-upload-copy"><strong>Subir foto de perfil</strong><small>JPG, PNG o WebP · máximo 8 MB</small></span>
+          <span class="photo-upload-action">Elegir foto</span>
+          <input id="model-photo" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+        </label>
+        <div class="form-grid">
+          <label class="field field-full"><span>Nombre o alias <b>*</b></span><input id="model-name" name="name" type="text" maxlength="70" placeholder="Ej. Luna M." autocomplete="off" required></label>
+          <label class="field field-full"><span>Usuario en la plataforma</span><div class="input-prefix"><span>@</span><input id="model-handle" name="handle" type="text" maxlength="80" placeholder="usuario" autocomplete="off"></div></label>
+          <label class="field"><span>Ingresos del mes <b>*</b></span><div class="input-prefix currency-prefix"><span>$</span><input id="model-revenue" name="revenue" type="number" min="0" step="0.01" placeholder="0.00" required></div></label>
+          <label class="field"><span>Tu comisión <b>*</b></span><div class="input-suffix"><input id="model-rate" name="rate" type="number" min="0" max="100" step="0.1" placeholder="20" required><span>%</span></div></label>
+        </div>
+        <div class="calc-preview" id="calc-preview"><span>Tu comisión estimada</span><strong id="form-commission">$0</strong></div>
+        <div class="consent-box">
+          <label class="check-row"><input id="model-adult" type="checkbox" required><span>Confirmo que la modelo tiene 18 años o más.</span></label>
+          <label class="check-row"><input id="model-consent" type="checkbox" required><span>Confirmo que tengo autorización para guardar su foto.</span></label>
+        </div>
+        <p class="form-error" id="form-error" role="alert"></p>
+      </div>
+      <div class="dialog-footer">
+        <button class="button button-quiet" id="cancel-dialog" type="button">Cancelar</button>
+        <button class="button button-primary" type="submit" id="save-model">Guardar modelo</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="confirm-dialog" id="delete-dialog" aria-labelledby="delete-title">
+    <div class="confirm-content">
+      <span class="delete-symbol" aria-hidden="true">!</span>
+      <h2 id="delete-title">¿Eliminar este perfil?</h2>
+      <p>Se borrarán sus datos y la foto guardada en este navegador. Esta acción no se puede deshacer.</p>
+      <div class="confirm-actions">
+        <button class="button button-quiet" id="keep-model" type="button">Cancelar</button>
+        <button class="button button-danger" id="confirm-delete" type="button">Eliminar perfil</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
